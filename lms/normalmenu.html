@@ -1,0 +1,33 @@
+<div class="container">
+  			<div class="row">
+  				<div class="offset10 span3">
+  				<a href="/log2in/"><i class=" icon-home"></i> Home </a>
+  				<a href="/logout/"><i class=" icon-off"></i> Log Out </a>
+  				
+  			</div></div>
+  		</div>
+  <div class="container">
+  			<div class="row">
+  				<div class=span3">
+  					{% for extra_object in extra_object %}
+  				<i class=" icon-user"></i>  {{extra_object.name_of_employee}}<br/> 
+  				<i class="icon-globe"></i> 	{{extra_object.position}}<br/>
+  				
+  				{% endfor %}
+
+  			</div></div>
+  		</div>
+  		<br/>
+  
+  	 <div class="container" >
+  		 	<div class="row" >
+  		 		
+      			<div class="span3 bs-docs-sidebar">
+        			<ul class="nav nav-list bs-docs-sidenav" style="background-color: white">
+          				  <li><a href="/notification1/"><i class="icon-envelope"></i> Notification</a></li>
+				          <li><a href="/applyleave/"><i class="icon-list-alt"></i> Apply Leave </a></li>
+				          <li><a href="/Holiday_display/"><i class="icon-calendar"></i> Holiday List</a></li>
+				           
+        			</ul>
+     		 </div> 
+     		

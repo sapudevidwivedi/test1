@@ -1,0 +1,1308 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+  
+  <!--for autocomplete-->
+  <title>jQuery UI Autocomplete - Default functionality</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+  <!-- -->
+  
+   <meta charset="utf-8">
+    <title>Sign in &middot; Twitter Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}bootstrap/js/bootstrap.js" rel="stylesheet">
+    <link href="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js" rel="stylesheet">
+    <style type="text/css">
+    	.alert{
+    width:400px;
+   background-color: #0066FF;
+   
+}
+    </style>
+    <style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+
+    </style>
+    <link href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+  
+  <!-- '#' IN JQUERY IS USED TO ACCESS ID AND '.' IN JQUERY IS USED TO ACCESS CLASS-->
+
+  
+ 
+  
+  <script type="text/javascript"> 
+  
+  
+  function days_Calculate(){ 
+  	//alert('hiiiiiiii');
+	  var str="";
+	  var empty_list1 = "{{empty_list|safe}}";
+	  //alert(empty_list1);
+	  for (var i=1;i<empty_list1.length-1;i++){
+	  		str=str+empty_list1[i];
+	  	};
+	  var chutti=String(str).split(',');
+	  //alert(chutti);
+	  //for (var i=0; i<chutti.length;i++){
+	  	//alert(chutti[i]);
+	   //};
+  	
+  	var a=document.getElementById('datepicker1').value;
+  	//alert(a);
+  	var b=document.getElementById("datepicker2").value;
+  	//alert(b);
+  	var one_day=1000*60*60*24
+  	//alert(one_day);
+  	var x=a.split("/");     
+    var y=b.split("/");
+    var month1=x[0]-1;
+    var month2=y[0]-1; 
+    var year1=x[2];
+    var year2=y[2];
+    var day1=x[1];
+    var day2=y[1];
+  //date format(Fullyear,month,date) 
+    var date1=new Date(x[2],(x[0]-1),x[1]);
+ 	var date2=new Date(y[2],(y[0]-1),y[1]);  
+  //Calculate difference between the two dates, and convert to days
+  	if (year1==year2)
+  	{
+	  	if (date2>=date1)
+	  		{
+	  		Diff1=Math.ceil((date2.getTime()-date1.getTime())/(one_day));
+	    	diff1=Diff1+1 
+	 
+	    	var now = new Date(y[2],(y[0]-1),y[1]);
+			var daysOfYear = [];
+			for (var d = new Date(x[2],(x[0]-1),x[1]); d <= now; d.setDate(d.getDate() + 1))
+			 	{
+			 		
+			 		var get_date=d.getDate();//1-31
+			 		var weekend=d.getDay();//0-6
+			 		var get_year=d.getFullYear();//yyyy
+			 		var get_month=d.getMonth();//1-11
+				
+			 		for (var i=0; i<chutti.length;i++){
+	  					//alert('chutti');
+	  					nv=chutti[i];
+	  					//alert(nv);
+	  					var nv_date=new Date(nv);
+	  					var get_date_nv=nv_date.getDate();//1-31
+			 			var weekend_nv=nv_date.getDay();//0-6
+			 			var get_year_nv=nv_date.getFullYear();//yyyy
+			 			var get_month_nv=nv_date.getMonth();//1-11
+			 			
+			 			//alert('get_date_nv');
+			 			//alert(get_date_nv);
+			 			if(get_date_nv==get_date){
+			 				if(get_month_nv==get_month){
+			 					if(get_year_nv==get_year){
+			 						alert('date is matched with holiday list');
+			 						diff1=diff1-1;
+			 					}
+			 				}
+			 			}
+	  					
+	  				};
+			 		
+			 		
+			 		
+			 		//var weekend=d.getDay();
+			 		if (weekend==0)
+			 			{
+			 				alert('Sunday');
+			 				//alert(weekend);
+			 				diff1=diff1-1;
+			 				
+			 			}
+			 		if(weekend==6)
+			 			{
+			 				alert('Saturday');
+			 				//alert(weekend);
+			 				diff1=diff1-1;
+			 				//alert(diff1);
+			 			}
+	    	//to assign to the field 
+	    		//document.getElementById("id_actual_totalleavesdifference").value=diff1;  	
+	    		}
+	    	}
+	    	
+	    else
+	    	{
+	    		alert('invalid date');
+	    	}
+	 } 
+	 else
+	 {
+	 	alert('to long leave:year donot match');
+	 }  	
+    
+//_Diff gives the diffrence between the two dates.
+  	
+  	//p=Math.ceil(y.getTime()-x.getTime())/(one_day)
+  	//alert(p);
+  	
+	document.getElementById("id_actual_totalleavesdifference").value=diff1;
+  	 
+  }
+  
+     $(function() {
+    $( "#datepicker1" ).datepicker({minDate:-6});
+    
+    $(document).ready(function(){
+      	$("#datepicker2").click(function(){
+      				$("#datepicker2").focus();
+        });
+        $("#datepicker2").focus(function(){
+    			    	var from_date = $( "#datepicker1" ).val();
+    			    	$( "#datepicker2" ).attr('class','');
+    			    	if(from_date != null && from_date !=''){
+    			    		var from_date = new Date(from_date.split('/')[2],from_date.split('/')[0]-1,from_date.split('/')[1]);
+    			    		var day_diff = Math.floor((new Date()-from_date)/(1000*3600*24))*-1;
+    			    		var i=parseInt(day_diff);
+    			    		$( "#datepicker2" ).datepicker({minDate:i});
+    			    	}else{
+    			    	$( "#datepicker2" ).datepicker({minDate:-6});
+    			    	}
+        });
+  });
+  });
+	//employeelist_Calculate
+	// function employeelist_Calculate(){
+  	// var str="";
+	// var empty_list1 = "{{empty_list|safe}}";
+	  // for (var i=1;i<empty_list1.length-1;i++){
+	  		// str=str+empty_list1[i];
+	  	// };
+	  // var xyz=String(str).split(',');
+	  // for (var i=0;i<xyz.length;i++){alert(xyz[i]);}
+  	// //document.getElementById("id_supervisor_number").value=xyz;
+  // }
+  
+	//this code is for autocomplete to implement
+	// $(function() {
+    // var availableTags = [
+      // "Sapu Dwivedi",
+      // "Madhu",
+      // "Venkat",
+      // "Shashank", 
+    // ];
+    // $( "#tags1" ).autocomplete({	
+      // source: availableTags
+    // });
+    // $( "#tags2" ).autocomplete({	
+      // source: availableTags
+    // });
+//    
+  // });
+  
+  $(function(){
+  // $("#tags1").autocomplete("/company/autocomplete/?q='your_search_string'",{
+    // minChars: 2
+  //});
+  $("#tags1").autocomplete({
+        source: "/company/autocomplete/",
+        minChars: 2
+    });
+  $("#tags2").autocomplete({
+        source: "/company/autocomplete/",
+        minChars: 2
+    });  
+});
+  // $(document).ready(function () {
+    // $("#tags1").autocomplete({
+        // source: "/ajax/tag/autocomplete/",
+    // });
+// });
+  // //
+  </script>  </head>
+  <!--<body class="container-fluid">  <!--<a href="#"><i class=" icon-user"></i>  </a>--> 
+  
+  	<body>
+  		
+  		{% if xsuperxforhr %}
+	  <div class="container">
+  			<div class="row">
+  				<div class="offset10 span3">
+  				<a href="/log2in/"><i class=" icon-home"></i> Home </a>
+  				<a href="/logout/"><i class=" icon-off"></i> Log Out </a>
+  				
+  			</div></div>
+  		</div>
+  <div class="container">
+  			<div class="row">
+  				<div class=span3">
+  					{% for extra_object in extra_object %}
+  				<i class=" icon-user"></i>  {{extra_object.name_of_employee}}<br/> 
+  				<i class="icon-globe"></i> 	{{extra_object.position}}<br/>
+  				
+  				{% endfor %}
+
+  			</div></div>
+  		</div>
+  		<br/>
+  
+  	 <div class="container" >
+  		 	<div class="row" >
+  		 		
+      			<div class="span3 bs-docs-sidebar">
+        			<ul class="nav nav-list bs-docs-sidenav" style="background-color: white">
+          				  <li><a href="/notification1/"><i class="icon-envelope"></i> Notification</a></li>
+				          <li><a href="/applyleave/"><i class="icon-list-alt"></i> Apply Leave </a></li>
+				          <li><a href="/Holiday_display/"><i class="icon-calendar"></i> Holiday List</a></li>
+				          <li><a href="/display_detail/"><i class="icon-tint"></i> Add Employee</a></li>
+					<li><a href="/xsuperdisplay22/"><i class="icon-folder-close"></i> Manage Hierchy</a></li>
+					<li><a href="/Position_tabledisplay/"><i class="icon-adjust"></i> Add Position</a></li>
+		<li><a href="/teamtabledisplay/"><i class="icon-certificate"></i>Add Team</a></li>
+		<li><a href="/holidaytype_tabledisplay/"><i class="icon-briefcase"></i> Add Holiday Type</a></li>
+
+        			</ul>
+     		 </div> 
+     		
+  <div class="offset1 span4">
+   		<div class="offset1">
+ 		<small> </small>
+   		</div>
+      <div class="span4 well" style="background-color: white" >
+ 	
+ 			<small>You Are Not Alloated Supervisor.To Alloat Supervisor <a href='/supervisordetail/'>ADD </a></small>
+ 	 </div>
+     	 </div>
+     	</div>
+</table>
+ 		
+</div></div>
+ 	
+ {% endif %} 
+  		
+  		{% if xsuperx %}
+	  <div class="container">
+  			<div class="row">
+  				<div class="offset10 span3">
+  				<a href="/log2in/"><i class=" icon-home"></i> Home </a>
+  				<a href="/logout/"><i class=" icon-off"></i> Log Out </a>
+  				
+  			</div></div>
+  		</div>
+  <div class="container">
+  			<div class="row">
+  				<div class=span3">
+  					{% for extra_object in extra_object %}
+  				<i class=" icon-user"></i>  {{extra_object.name_of_employee}}<br/> 
+  				<i class="icon-globe"></i> 	{{extra_object.position}}<br/>
+  				
+  				{% endfor %}
+
+  			</div></div>
+  		</div>
+  		<br/>
+  
+  	 <div class="container" >
+  		 	<div class="row" >
+  		 		
+      			<div class="span3 bs-docs-sidebar">
+        			<ul class="nav nav-list bs-docs-sidenav" style="background-color: white">
+          				  <li><a href="/notification1/"><i class="icon-envelope"></i> Notification</a></li>
+				          <li><a href="/applyleave/"><i class="icon-list-alt"></i> Apply Leave </a></li>
+				          <li><a href="/Holiday_display/"><i class="icon-calendar"></i> Holiday List</a></li>
+				          
+        			</ul>
+     		 </div> 
+     		
+  <div class="offset1 span4">
+   		<div class="offset1">
+ 		<small> </small>
+   		</div>
+      <div class="span4 well" style="background-color: white" >
+ 	
+ 			<small>You Are Not Alloated Supervisor.Consultant Your HR.</small>
+ 	 </div>
+     	 </div>
+     	</div>
+</table>
+ 		
+</div></div>
+ 	
+ {% endif %} 	
+  	
+  		
+  	{% if casualnotsendmail %}
+	<div class="container">
+  			<div class="row">
+  				<div class="offset10 span3">
+  				<a href="/log2in/"><i class=" icon-home"></i> Home </a>
+  				<a href="/logout/"><i class=" icon-off"></i> Log Out </a>
+  				
+  			</div></div>
+  		</div>
+  	<div class="container">
+  			<div class="row">
+  				<div class=span3">
+  					{% for z2 in extra_object %}
+  				<i class=" icon-user"></i>   	{{z2.name_of_employee}}<br/> 
+  				<i class="icon-globe"></i> 	{{z2.position}}<br/>
+  				
+  				{% endfor %}
+
+  			</div></div>
+  		</div>
+  		<br/>	
+  		<div class="container" >
+  		 	<div class="row" >
+  		 		
+      			<div class="span3 bs-docs-sidebar">
+        			<ul class="nav nav-list bs-docs-sidenav" style="background-color: white">
+          				  <li class="active"><a href="/notification1/"><i class="icon-envelope"></i> Notification</a></li>
+				          <li><a href="/applyleave/"><i class="icon-list-alt"></i> Apply Leave </a></li>
+				          <li ><a href="/Holiday_display/"><i class="icon-calendar"></i> Holiday List</a></li>
+				          <li><a href="/display_detail/"><i class="icon-tint"></i> Add Employee</a></li>
+				          <li><a href="/xsuperdisplay22/"><i class="icon-folder-close"></i> Manage Hierchy</a></li>
+				          <li><a href="/Position_tabledisplay/"><i class="icon-adjust"></i> Add Position</a></li>
+						<li><a href="/teamtabledisplay/"><i class="icon-certificate"></i>Add Team</a></li>
+						<li><a href="/holidaytype_tabledisplay/"><i class="icon-briefcase"></i> Add Holiday Type</a></li>
+
+        			</ul>
+     		 </div>
+     	 
+		<div class="offset span4">
+			<div class="offset">
+   		
+   		</div>
+      <div class="span5" style="background-color: white" >	
+     		 <form method='POST' action="/abcofcasual/id={{leave_id}}/" >{% csrf_token %}
+  		<br/>
+  		<p><strong>&nbsp;Insufficient Casual Or Sick Leave! To Grant Press Allow .</strong></p>
+  
+   		<center>
+ 			<button class="btn btn-medium btn-primary" type="submit" name ="submit">Allow</button>	
+ 			<button class="btn btn-medium btn-primary" type="submit" name ="reject33">Reject</button>	
+ 			</center>
+  	</form>
+  	</div></div> </div>
+     		 
+     		 <!--<div class="container">  
+		<div class="row">  
+		<div class="offset1 span6">  
+		<div class="alert">  
+  		<a class="close" data-dismiss="alert" href="/login/name={{showname}}/">×</a>  
+  		<font color="white" ><strong> Insufficient Casual Leave! To Grant Press Allow . </strong></font>  
+			</div>  
+		</div>  
+		</div>  
+			</div>  
+		<script src="twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>  
+			<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-alert.js"></script> 
+		-->	
+     	
+     	<!--
+     	<div class="container">  
+		<div class="row">  
+		<div class="offset1 span6">	
+ <div class="alert-message block-message warning">
+  <!--<a class="close" href="/login/name={{showname}}/">×</a>
+  <p><strong>Insufficient Casual Leave! To Grant Press Allow .</strong></p>
+  <div class="alert-actions">
+    <a class="btn small" href="#">Allow</a> <a class="btn small" href="#">Reject</a>
+  </div>
+</div></div> </div>
+</div></div>-->
+
+{% endif %}	
+  		
+  		
+  		
+  		{% if z %}
+	<div class="container">
+  			<div class="row">
+  				<div class="offset10 span3">
+  				<a href="/log2in/"><i class=" icon-home"></i> Home </a>
+  				<a href="/logout/"><i class=" icon-off"></i> Log Out </a>
+  				
+  			</div></div>
+  		</div>
+  	<div class="container">
+  			<div class="row">
+  				<div class=span3">
+  					{% for z2 in extra_object %}
+  				<i class=" icon-user"></i>   	{{z2.name_of_employee}}<br/> 
+  				<i class="icon-globe"></i> 	{{z2.position}}<br/>
+  				
+  				{% endfor %}
+
+  			</div></div>
+  		</div>
+  		<br/>	
+  		<div class="container" >
+  		 	<div class="row" >
+  		 		
+      			<div class="span3 bs-docs-sidebar">
+        			<ul class="nav nav-list bs-docs-sidenav" style="background-color: white">
+          				  <li class="active"><a href="/notification1/"><i class="icon-envelope"></i> Notification</a></li>
+				          <li><a href="/applyleave/"><i class="icon-list-alt"></i> Apply Leave </a></li>
+				          <li ><a href="/Holiday_display/"><i class="icon-calendar"></i> Holiday List</a></li>
+				          <li><a href="/display_detail/"><i class="icon-tint"></i> Add Employee</a></li>
+				          <li><a href="/xsuperdisplay22/"><i class="icon-folder-close"></i> Manage Hierchy</a></li>
+				          <li><a href="/Position_tabledisplay/"><i class="icon-adjust"></i> Add Position</a></li>
+					<li><a href="/teamtabledisplay/"><i class="icon-certificate"></i>Add Team</a></li>
+				<li><a href="/holidaytype_tabledisplay/"><i class="icon-briefcase"></i> Add Holiday Type</a></li>
+
+        			</ul>
+     		 </div>
+     		 <div class="container">  
+		<div class="row">  
+		<div class="offset1 span6">  
+		<div class="alert">  
+  		<a class="close" data-dismiss="alert" href="/log2in/">×</a>  
+  		<font color="white" ><strong> Mail send</strong></font>  
+			</div>  
+		</div>  
+		</div>  
+			</div>  
+		<script src="twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>  
+			<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-alert.js"></script> 
+     		 
+
+{% endif %}
+  		
+  		
+  		{% if x %}
+ 	<div class="container">
+  			<div class="row">
+  				<div class="offset10 span3">
+  				<a href="/log2in/"><i class=" icon-home"></i> Home </a>
+  				<a href="/logout/"><i class=" icon-off"></i> Log Out </a>
+  				
+  			</div></div>
+  		</div>
+ 	<div class="container">
+  			<div class="row">
+  				<div class=span3">
+  					{% for extra_object in extra_object %}
+  				<i class=" icon-user"></i>  {{extra_object.name_of_employee}}<br/> 
+  				<i class="icon-globe"></i> 	{{extra_object.position}}<br/>
+  				
+  				{% endfor %}
+
+  			</div></div>
+  		</div>
+  		<br/>
+ 		<div class="container" >
+  		 	<div class="row" >
+  		 		
+      			<div class="span3 bs-docs-sidebar">
+        			<ul class="nav nav-list bs-docs-sidenav" style="background-color: white">
+          				  <li class="active"><a href="/notification1/"><i class="icon-envelope"></i> Notification</a></li>
+				          <li><a href="/applyleave/"><i class="icon-list-alt"></i> Apply Leave </a></li>
+				          <li ><a href="/Holiday_display/"><i class="icon-calendar"></i> Holiday List</a></li>
+				          <li><a href="/display_detail/"><i class="icon-tint"></i> Add Employee</a></li>
+				          <li><a href="/xsuperdisplay22/"><i class="icon-folder-close"></i> Manage Hierchy</a></li>
+				          <li><a href="/Position_tabledisplay/"><i class="icon-adjust"></i> Add Position</a></li>
+<li><a href="/teamtabledisplay/"><i class="icon-certificate"></i>Add Team</a></li>
+<li><a href="/holidaytype_tabledisplay/"><i class="icon-briefcase"></i> Add Holiday Type</a></li>
+
+        			</ul>
+     		 </div> 
+     		 <div class="offset span8" >
+ 			<h5>Notification :</h5>
+ 			
+     		 	 <table class="table table-condensed" >
+     		 	 <tr style="background-color:#0066FF">
+ <!--<form method='POST' action="/leaveacceptorreject/id={{leave_id}}/" >{% csrf_token %}-->
+ <form method='POST' action="/finalmailsend/id={{leave_id}}/" >{% csrf_token %}	
+ 	
+
+ 	
+ 	
+ 		<tr>
+ 				<td>
+ 					<small>  Name</small> 
+ 				</td>
+ 				
+ 				<td><small> Leaves From</small> 
+ 				</td>
+ 				<td>
+ 					<small> Leaves Till </small> 
+ 				</td>
+ 				<td>
+ 					<small> Leaves Type </small> 
+ 				</td>
+ 				<td>
+ 					<small> Total Days </small> 
+ 				</td>
+ 				<td>
+ 					<small> Reason</small> 
+ 				</td>
+ 				<td> </td>
+ 				<td> </td>
+ 		</tr>
+ 	{% for x in x %}
+ 		<tr>
+ 			<td>
+ 				<small>{{x.name}}</small>
+ 		 </td>
+ 		    <td>
+ 		    	<small>{{x.leaves_from}}</small>
+ 		    </td>
+ 			<td>
+ 				<small>{{x.leaves_till}}</small> 
+ 			</td>
+ 			<td>
+ 				<small>{{x.leave_type_id}}</small> 
+ 			</td>
+ 			<td>
+ 				<small>{{x.actual_totalleavesdifference}}</small> 
+ 			</td>
+ 			<td>
+ 				<small>{{x.leaves_applied_reason}}</small> 
+ 			</td>
+ 			<td><small><a href="/finalmailsend/id={{leave_id}}/">Accept</a><small></td>
+   	        <td><small><a href="/Rejectfinalmailsend/id={{leave_id}}/">Reject</a><small></td>
+ 			
+ 			<!--<td><small><a href="/finalmailsend/id={{leave_id}}/eid={{e}}/">Accept</a><small></td>
+   	        <td><small><a href="/Rejectfinalmailsend/id={{leave_id}}/eid={{e}}/">Reject</a><small></td>
+ 			<td><input type="submit" name="u_name={{u_name}}=accept" value="ACCEPT" /></td>
+   			<td><input type="submit" name="u_name={{u_name}}=reject" value="REJECT" /></td>-->
+      </tr>	
+       		
+ 
+ 	{% endfor %}
+ 	       
+ 	</table>
+ 	
+ 	
+ 			
+ 	</form>
+ 
+ 
+ {% endif %}
+ 
+  
+  {% if my_obj3 %}
+ 	<div class="container">
+  	<div class="row">
+  	<div class="offset10 span3">
+	  	<a href="/log2in/"><i class=" icon-home"></i> Home </a>
+	  	<a href="/logout/"><i class=" icon-off"></i> Log Out </a>				
+  	</div></div></div>
+  <div class="container">
+  	<div class="row">
+  	<div class="span2">
+  	{% for extra_object in extra_object %}
+  	<i class=" icon-user"></i>{{extra_object.name_of_employee}}<br/> 
+  	<i class="icon-globe"></i>{{extra_object.position}}<br/>
+  {% endfor %}
+</div></div></div>
+  <br/>
+ 	<div class="container" >
+  <div class="row-fluid" >
+  <div class="span3 bs-docs-sidebar">
+	   <ul class="nav nav-list bs-docs-sidenav" style="background-color: white">
+	      	<li><a href="/notification1/"><i class="icon-envelope"></i> Notification</a></li>
+			<li class="active"><a href="/applyleave/"><i class="icon-list-alt"></i> Apply Leave</a></li>
+			<li><a href="/Holiday_display/"><i class="icon-calendar"></i> Holiday List</a></li>
+		 	<li><a href="/display_detail/"><i class="icon-tint"></i> Add Employee</a></li>
+		 	<li><a href="/xsuperdisplay22/"><i class="icon-folder-close"></i> Manage Hierchy</a></li>
+	   		<li><a href="/Position_tabledisplay/"><i class="icon-adjust"></i> Add Position</a></li>
+<li><a href="/teamtabledisplay/"><i class="icon-certificate"></i>Add Team</a></li>
+<li><a href="/holidaytype_tabledisplay/"><i class="icon-briefcase"></i> Add Holiday Type</a></li>
+
+	   </ul>
+   </div> 
+ 
+   <div class="offset1 span6" >
+     		 	<h5>Leave Applied Summary :</h5>
+     		 
+     		 	 <table class="table table-striped">
+   	
+ 		<tr>
+ 				<td>
+ 					<small>Name</small> 
+ 				</td>
+ 				<td>
+ 					<small>Leaves From</small>
+ 				</td>
+ 				<td>
+ 					<small>Leaves Till </small>
+ 				</td>
+ 				<td>
+ 					<small>Leaves Type </small>
+ 				</td>
+ 				<td>
+ 					<small>Total Days </small>
+ 				</td>
+ 				<td>
+ 					<small>Reason</small>
+ 				</td>
+ 		</tr>
+ 	{% for my_obj3 in my_obj3 %}
+ 		<tr>
+ 			<td>
+ 				<small>{{my_obj3.name}}</small>
+ 		 </td>
+ 		    <td>
+ 		    	<small>{{my_obj3.leaves_from}}</small>
+ 		    </td>
+ 			<td>
+ 				<small>{{my_obj3.leaves_till}}</small> 
+ 			</td>
+ 			<td>
+ 				<small>{{my_obj3.leave_type_id}}</small> 
+ 			</td>
+ 			<td>
+ 				<small>{{my_obj3.actual_totalleavesdifference}}</small> 
+ 			</td>
+ 			<td>
+ 				<small>{{my_obj3.leaves_applied_reason}}</small> 
+ 			</td>
+ 			
+       </tr>
+  
+ 	{% endfor %}
+ 	       
+ 	</table>
+ 	<h5>You Have Applied for leave</h5>
+ 	
+
+ 	
+ {% endif %}
+ 
+  
+  
+  {% if my_obj2 %}
+ 	<div class="container">
+  	<div class="row">
+  	<div class="offset10 span3">
+	  	<a href="/log2in/"><i class=" icon-home"></i> Home </a>
+	  	<a href="/logout/"><i class=" icon-off"></i> Log Out </a>				
+  	</div></div></div>
+  <div class="container">
+  	<div class="row">
+  	<div class="span2">
+  	{% for extra_object in extra_object %}
+  	<i class=" icon-user"></i>{{extra_object.name_of_employee}}<br/> 
+  	<i class="icon-globe"></i>{{extra_object.position}}<br/>
+  {% endfor %}
+</div></div></div>
+  <br/>
+ 	<div class="container" >
+  <div class="row-fluid" >
+  <div class="span3 bs-docs-sidebar">
+	   <ul class="nav nav-list bs-docs-sidenav" style="background-color: white">
+	      	<li><a href="/notification1/"><i class="icon-envelope"></i> Notification</a></li>
+			<li class="active"><a href="/applyleave/"><i class="icon-list-alt"></i> Apply Leave</a></li>
+			<li><a href="/Holiday_display/"><i class="icon-calendar"></i> Holiday List</a></li>
+		 	<li><a href="/display_detail/"><i class="icon-tint"></i> Add Employee</a></li>
+		 	<li><a href="/xsuperdisplay22/"><i class="icon-folder-close"></i> Manage Hierchy</a></li>
+	   		<li><a href="/Position_tabledisplay/"><i class="icon-adjust"></i> Add Position</a></li>
+<li><a href="/teamtabledisplay/"><i class="icon-certificate"></i>Add Team</a></li>
+<li><a href="/holidaytype_tabledisplay/"><i class="icon-briefcase"></i> Add Holiday Type</a></li>
+
+	   </ul>
+   </div> 
+ 	 <div class="offset span9">
+   		<div class="offset1">
+   			<h5>Errors :</h5>
+   		</div>
+ 	 <div class="span9" style="background-color: white" >	
+     		<form class="form-horizontal" method='POST' >{% csrf_token %} 	
+ 			<br/>
+ 				<center>
+ 					<table cellpadding="4">
+ 				{% for my_obj2 in my_obj2 %}
+ 					
+ 					
+ 						<tr> 
+ 							<td><small>{{my_obj2.label}}</small></td> 
+  							<td><small>{{my_obj2}}</small></td> 
+  								{% if my_obj2.errors %}
+ 								<td>{{my_obj2.errors}}</td>	
+ 								{% endif %}
+ 						</tr> 
+ 						
+ 						
+ 				{% endfor %}
+ 			</table>
+ 			</center>
+ 			<br/>
+ 			<center>
+ 			<button class="btn btn-medium btn-primary" type="submit" name ="submit">Submit</button>	
+ 			<button class="btn btn-medium btn-primary" type="submit" name ="cancel1">Cancel</button>	
+ 			</center>
+ 			</form>
+ 	</div>
+   </div>
+   	</div></div> 
+  
+ {% endif %}	
+  
+  		
+  {% if notice1 %}
+ 	<div class="container">
+  			<div class="row">
+  				<div class="offset10 span3">
+  				<a href="/log2in/"><i class=" icon-home"></i> Home </a>
+  				<a href="/logout/"><i class=" icon-off"></i> Log Out </a>
+  				
+  			</div></div>
+  		</div>
+  <div class="container">
+  			<div class="row">
+  				<div class=span3">
+  					{% for extra_object in extra_object %}
+  				<i class=" icon-user"></i>   	{{extra_object.name_of_employee}}<br/> 
+  				<i class="icon-globe"></i> 	{{extra_object.position}}<br/>
+  				
+  				{% endfor %}
+
+  			</div></div>
+  		</div>
+  		<br/>
+  		 <div class="container" >
+  		 	<div class="row" >
+  		 		
+      			<div class="span3 bs-docs-sidebar">
+        			<ul class="nav nav-list bs-docs-sidenav" style="background-color: white">
+          				  <li class="active"><a href="/notification1/"><i class="icon-envelope"></i> Notification</a></li>
+				          <li><a href="/applyleave/"><i class="icon-list-alt"></i> Apply Leave </a></li>
+				          <li ><a href="/Holiday_display/"><i class="icon-calendar"></i> Holiday List</a></li>
+				          
+        			</ul>
+     		 </div> 	
+ 
+
+		<div class="offset span8" >
+ 			<h5>Notification :</h5>
+ 			
+     		 	 <table class="table table-condensed" >
+     		 	 <tr style="background-color:#0066FF">
+ 	
+ 		<tr>
+ 				<td>
+ 					<small>  Name</small> 
+ 				</td>
+ 				
+ 				<td><small> Leaves From</small> 
+ 				</td>
+ 				<td>
+ 					<small> Leaves Till </small> 
+ 				</td>
+ 				<td>
+ 					<small> Leaves Type </small> 
+ 				</td>
+ 				<td>
+ 					<small> Total Days </small> 
+ 				</td>
+ 				<td>
+ 					<small> Reason</small> 
+ 				</td>
+ 				<td> </td>
+ 				<td> </td>
+ 		</tr>
+ 		 {% for notice1 in notice1 %}
+ 		<tr>
+ 		
+ 			<td>
+ 				<small>{{notice1.name}}</small>
+ 		 
+ 		    <td>
+ 		    	<small>{{notice1.leaves_from}}</small>
+ 		    </td>
+ 			<td>
+ 				<small>{{notice1.leaves_till}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{notice1.leave_type_id}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{notice1.actual_totalleavesdifference}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{notice1.leaves_applied_reason}} </small>
+ 			</td>
+ 			
+ 			<!--<td><input type="submit" name="ACCEPT123" value="ACCEPT" /></td>
+   	        <td><input type="submit" name="REJECT123" value="REJECT" /></td>
+   	        
+   	        <td><small><a href="/finalmailsend/id={{notice1.leave_id}}/eid={{e}}/">Accept</a><small></td>
+   	        <td><small><a href="/Rejectfinalmailsend/id={{notice1.leave_id}}/eid={{e}}/">Reject</a><small></td>-->
+ 			<td><small><a href="/finalmailsend/id={{notice1.leave_id}}/">Accept</a><small></td>
+   	        <td><small><a href="/Rejectfinalmailsend/id={{notice1.leave_id}}/">Reject</a><small></td>
+ 			
+ 	</form>
+       </tr>
+       
+       		
+ 
+ 	{% endfor %}
+ 	
+ 	       
+ 	</table>
+ 	
+ 	<table class="table table-condensed" >
+     		 	 <tr style="background-color:#0066FF">
+ 		<tr>
+ 				<td>
+ 					<small>Name</small> 
+ 				</td>
+ 				
+ 				<td><small>Leaves From</small>
+ 				</td>
+ 				<td>
+ 					<small>Leaves Till </small>
+ 				</td>
+ 				<td>
+ 					<small>Leaves Type </small>
+ 				</td>
+ 				<td>
+ 					<small>Total Days </small>
+ 				</td>
+ 				<td>
+ 					<small>Reason</small>
+ 				</td>
+ 				<td>
+ 					<small> Leave Status</small>
+ 				</td>
+ 				<td> </td>
+ 		</tr>
+ 	
+ 		{% for noticeforteamlead in noticeforteamlead %}
+ 		<tr>
+ 		
+ 			<td>
+ 				<small>{{noticeforteamlead.name}}</small>
+ 		 
+ 		    <td>
+ 		    	<small>{{noticeforteamlead.leaves_from}}</small>
+ 		    </td>
+ 			<td>
+ 				<small>{{noticeforteamlead.leaves_till}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{noticeforteamlead.leave_type_id}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{noticeforteamlead.actual_totalleavesdifference}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{noticeforteamlead.leaves_applied_reason}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{noticeforteamlead.leaves_approved_by_tl}}</small>
+ 			</td>
+ 			
+ 			<!--<td><input type="submit" name="ACCEPT123" value="ACCEPT" /></td>
+   	        <td><input type="submit" name="REJECT123" value="REJECT" /></td>-->
+   	        <td><small><a href="/checkleave/id={{noticeforteamlead.leave_id}}/">Check</a></small></td>
+   	        <!--<td><a href="/Rject_linkleaveacceptorreject/id={{notice3.leave_id}}/">REJECT</a></td>-->
+ 			
+ 	</form>
+       </tr>
+       
+       		
+ 	</center>
+ 	{% endfor %}
+ 	       
+ 	</table>
+ 	
+ {% endif %}		
+  		
+  		
+  
+  {% if againnoticeforteamlead %}
+ 	<div class="container">
+  			<div class="row">
+  				<div class="offset10 span3">
+  				<a href="/log2in/"><i class=" icon-home"></i> Home </a>
+  				<a href="/logout/"><i class=" icon-off"></i> Log Out </a>
+  				
+  			</div></div>
+  		</div>
+  <div class="container">
+  			<div class="row">
+  				<div class=span3">
+  					{% for extra_object in extra_object %}
+  				<i class=" icon-user"></i>   {{extra_object.name_of_employee}}<br/> 
+  				<i class="icon-globe"></i> 	{{extra_object.position}}<br/>
+  				
+  				{% endfor %}
+
+  			</div></div>
+  		</div>
+  		<br/>
+  		 <div class="container" >
+  		 	<div class="row" >
+  		 		
+      			<div class="span3 bs-docs-sidebar">
+        			<ul class="nav nav-list bs-docs-sidenav" style="background-color: white">
+          				  <li class="active"><a href="/notification1/"><i class="icon-envelope"></i> Notification</a></li>
+				          <li><a href="/applyleave/"><i class="icon-list-alt"></i> Apply Leave </a></li>
+				          <li ><a href="/Holiday_display/"><i class="icon-calendar"></i> Holiday List</a></li>
+				          
+        			</ul>
+     		 </div> 	
+ 
+
+		<div class="offset span8" >
+ 			<h5>Notification :</h5>
+ 
+ 		
+ 	<table class="table table-condensed" >
+     		 	 <tr style="background-color:#0066FF">
+ 		<tr>
+ 				<td>
+ 					<small>Name</small> 
+ 				</td>
+ 				
+ 				<td><small>Leaves From</small>
+ 				</td>
+ 				<td>
+ 					<small>Leaves Till </small>
+ 				</td>
+ 				<td>
+ 					<small>Leaves Type </small>
+ 				</td>
+ 				<td>
+ 					<small>Total Days </small>
+ 				</td>
+ 				<td>
+ 					<small>Reason</small>
+ 				</td>
+ 				<td>
+ 					<small> Leave Status</small>
+ 				</td>
+ 				<td> </td>
+ 		</tr>
+ 	
+ 		{% for noticeforteamlead in againnoticeforteamlead %}
+ 		<tr>
+ 		
+ 			<td>
+ 				<small>{{noticeforteamlead.name}}</small>
+ 		 
+ 		    <td>
+ 		    	<small>{{noticeforteamlead.leaves_from}}</small>
+ 		    </td>
+ 			<td>
+ 				<small>{{noticeforteamlead.leaves_till}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{noticeforteamlead.leave_type_id}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{noticeforteamlead.actual_totalleavesdifference}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{noticeforteamlead.leaves_applied_reason}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{noticeforteamlead.leaves_approved_by_tl}}</small>
+ 			</td>
+ 			
+ 			<!--<td><input type="submit" name="ACCEPT123" value="ACCEPT" /></td>
+   	        <td><input type="submit" name="REJECT123" value="REJECT" /></td>-->
+   	        
+   	        <td><small><a href="/checkleave/id={{noticeforteamlead.leave_id}}/">Check</a></small></td>
+   	        
+   	        <!--<td><a href="/Rject_linkleaveacceptorreject/id={{notice3.leave_id}}/">REJECT</a></td>-->
+ 			
+ 	</form>
+       </tr>
+       
+       		
+ 	</center>
+ 	{% endfor %}
+ 	       
+ 	</table>
+ 	
+ {% endif %}
+  
+  
+  		
+  {% if newnotice1 %}
+ 	<div class="container">
+  			<div class="row">
+  				<div class="offset10 span3">
+  				<a href="/log2in/"><i class=" icon-home"></i> Home </a>
+  				<a href="/logout/"><i class=" icon-off"></i> Log Out </a>
+  				
+  			</div></div>
+  		</div>
+  <div class="container">
+  			<div class="row">
+  				<div class=span3">
+  					{% for extra_object in extra_object %}
+  				<i class=" icon-user"></i>   	{{extra_object.name_of_employee}}<br/> 
+  				<i class="icon-globe"></i> 	{{extra_object.position}}<br/>
+  				
+  				{% endfor %}
+
+  			</div></div>
+  		</div>
+  		<br/>
+  		 <div class="container" >
+  		 	<div class="row" >
+  		 		
+      			<div class="span3 bs-docs-sidebar">
+        			<ul class="nav nav-list bs-docs-sidenav" style="background-color: white">
+          				  <li class="active"><a href="/notification1/"><i class="icon-envelope"></i> Notification</a></li>
+				          <li><a href="/applyleave/"><i class="icon-list-alt"></i> Apply Leave </a></li>
+				          <li ><a href="/Holiday_display/"><i class="icon-calendar"></i> Holiday List</a></li>
+				          
+        			</ul>
+     		 </div> 	
+ 
+
+		<div class="offset span8" >
+ 			<h5>Notification :</h5>
+ 			
+     		 	 <table class="table table-condensed" >
+     		 	 <tr style="background-color:#0066FF">
+ 	
+ 		<tr>
+ 				<td>
+ 					<small>  Name</small> 
+ 				</td>
+ 				
+ 				<td><small> Leaves From</small> 
+ 				</td>
+ 				<td>
+ 					<small> Leaves Till </small> 
+ 				</td>
+ 				<td>
+ 					<small> Leaves Type </small> 
+ 				</td>
+ 				<td>
+ 					<small> Total Days </small> 
+ 				</td>
+ 				<td>
+ 					<small> Reason</small> 
+ 				</td>
+ 				<td> </td>
+ 				<td> </td>
+ 		</tr>
+ 		 {% for notice1 in newnotice1 %}
+ 		<tr>
+ 		
+ 			<td>
+ 				<small>{{notice1.name}}</small>
+ 		 
+ 		    <td>
+ 		    	<small>{{notice1.leaves_from}}</small>
+ 		    </td>
+ 			<td>
+ 				<small>{{notice1.leaves_till}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{notice1.leave_type_id}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{notice1.actual_totalleavesdifference}} </small>
+ 			</td>
+ 			<td>
+ 				<small>{{notice1.leaves_applied_reason}} </small>
+ 			</td>
+ 			
+ 			<!--<td><input type="submit" name="ACCEPT123" value="ACCEPT" /></td>
+   	        <td><input type="submit" name="REJECT123" value="REJECT" /></td>-->
+   	        
+   	        <!--<td><small><a href="/leaveacceptorreject/id={{notice1.leave_id}}/">Accept</a><small></td>
+   	        <td><small><a href="/Rject_linkleaveacceptorreject/id={{notice1.leave_id}}/">Reject</a><small></td>
+ 			-->
+ 			<!--<td><small><a href="/finalmailsend/id={{notice1.leave_id}}/eid={{e}}/">Accept</a><small></td>
+   	        <td><small><a href="/Rejectfinalmailsend/id={{notice1.leave_id}}/eid={{e}}/">Reject</a><small></td>-->
+ 			<td><small><a href="/finalmailsend/id={{notice1.leave_id}}/">Accept</a><small></td>
+   	        <td><small><a href="/Rejectfinalmailsend/id={{notice1.leave_id}}/">Reject</a><small></td>
+ 	</form>
+       </tr>
+       
+       		
+ 
+ 	{% endfor %}
+ 	
+ 	       
+ 	</table>
+ 	
+ 	       
+ 	
+ 	
+ {% endif %}
+ 		
+  		
+ {% if forservereroor %}
+ <h4> oops !!!!!!!!</h4>
+ {% endif %} 		
+ <!-- this form is for filling the supervisor of employee-->
+ 
+ {% if nonewnotification %}
+ 	<div class="container">
+  			<div class="row">
+  				<div class="offset10 span3">
+  				<a href="/log2in/"><i class=" icon-home"></i> Home </a>
+  				<a href="/logout/"><i class=" icon-off"></i> Log Out </a>
+  				
+  			</div></div>
+  		</div>
+  <div class="container">
+  			<div class="row">
+  				<div class=span3">
+  					{% for extra_object in extra_object %}
+  				<i class=" icon-user"></i>  {{extra_object.name_of_employee}}<br/> 
+  				<i class="icon-globe"></i> 	{{extra_object.position}}<br/>
+  				
+  				{% endfor %}
+
+  			</div></div>
+  		</div>
+  		<br/>
+  		<div class="container" >
+  		 	<div class="row" >
+  		 		
+      			<div class="span3 bs-docs-sidebar">
+        			<ul class="nav nav-list bs-docs-sidenav" style="background-color: white">
+          				  <li class="active"><a href="/notification1/"><i class="icon-envelope"></i> Notification</a></li>
+				          <li><a href="/applyleave/"><i class="icon-list-alt"></i> Apply Leave </a></li>
+				          <li><a href="/Holiday_display/"><i class="icon-calendar"></i> Holiday List</a></li>
+				          
+        			</ul>
+     		 </div> 
+     		 
+     		 <div class="container">  
+		<div class="row">  
+		<div class="offset1 span6">  
+		<div class="alert">  
+  		<a class="close" data-dismiss="alert" href="/log2in/">×</a>  
+  		<font color="white" ><strong> No New Notification.</strong></font>  
+			</div>  
+		</div>  
+		</div>  
+			</div>  
+		<script src="twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>  
+			<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-alert.js"></script> 
+     		 
+     		<!-- <div class="offset1 span5" >
+     		 	<h5>Notification Acknowlegement:</h5>
+     		 		
+     		 	
+     		 	
+     		 	 <table class="table table-condensed">
+     		 	 <tr style="background-color:#0066FF">
+ 				
+ 				<td>
+ 				<td><small><a href="#" onclick="$('.alert').show()"><font color="black" >Notification</font> </a></small></td>
+ 			
+ 			<div class="alert" style="display: none"> 
+    		<a class="close" onclick="$('.alert').hide()">×</a>  
+   			<font color="white" ><strong>Acknowlegement</strong><br/> You Have No New Notification.</font> 
+			<div class="alert-actions">
+    <a class="btn small" href="/login/name={{name}}/">ok</a> 
+  </div>
+			</div>-->
+ 			
+ 		</tr>
+   				
+   		
+       </tr>
+       		
+ 	
+ 
+  </div>
+     	 </div>
+     	</div>
+</table>
+ 		
+</div></div>
+ 
+ 
+ {% endif %}
+ 			
+ 			
+ 		
+ 	
+ 	
+   			
+   	
+ 
+     		 
+  
+  		
+
+
+  	
+  	
+  	
+ 
+    	
+ 			  				
+  				  		
+ 
+ 	
+ 
+
+ 
+ </center> 
+</body>
+</html>

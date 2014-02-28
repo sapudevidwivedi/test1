@@ -1,0 +1,34 @@
+<div class="container">
+  	<div class="row">
+  	<div class="offset10 span3">
+	  	<a href="/log2in/"><i class=" icon-home"></i> Home </a>
+	  	<a href="/logout/"><i class=" icon-off"></i> Log Out </a>				
+  	</div></div></div>
+ 	<div class="container">
+  			<div class="row">
+  				<div class=span3">
+  					{% for obj7 in extra_object %}
+  				<i class=" icon-user"></i>  {{obj7.name_of_employee}}<br/> 
+  				<i class="icon-globe"></i> 	{{obj7.position}}<br/>
+  				
+  				{% endfor %}
+
+  			</div></div>
+  		</div>
+  		<br/>
+ 		 <div class="container" >
+  		 	<div class="row" >
+  		 		
+      			<div class="span3 bs-docs-sidebar">
+        			<ul class="nav nav-list bs-docs-sidenav" style="background-color: white">
+          				  <li><a href="/notification1/"><i class="icon-envelope"></i> Notification</a></li>
+				          <li><a href="/applyleave/"><i class="icon-list-alt"></i> Apply Leave </a></li>
+				          <li><a href="/Holiday_display/"><i class="icon-calendar"></i> Holiday List</a>
+				          <li><a href="/display_detail/"><i class="icon-tint"></i> Add Employee</a></li>
+				          <li><a href="/xsuperdisplay22/"><i class="icon-folder-close"></i> Manage Hierchy</a></li>
+        					<!--<li><a href="/Gendertabledisplay/"><i class="icon-plus-sign"></i> Add Gender</a></li>-->
+						<li><a href="/Position_tabledisplay/"><i class="icon-adjust"></i> Add Position</a></li>
+						<li><a href="/teamtabledisplay/"><i class="icon-certificate"></i>Add Team</a></li>
+		 				<li><a href="/holidaytype_tabledisplay/"><i class="icon-briefcase"></i> Add Holiday Type</a></li>
+        			</ul>
+     		 </div>
